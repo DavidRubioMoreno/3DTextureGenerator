@@ -1,55 +1,51 @@
+#define _CRT_SECURE_NO_WARNINGS
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
 #include <iostream>
 #include <vector>
+#include <thread>
 #include <cmath>
+#include <chrono>
 #include "FastNoiseLite.h"
 
 // ==============================
 // CONFIGURACIÓN 
 // ==============================
-constexpr int VOLUME_SIZE = 256;          // 256^3
-constexpr int ATLAS_TILES = 16;           // 16x16 tiles
-constexpr int TILE_SIZE = VOLUME_SIZE;    // 256
-constexpr int IMAGE_SIZE = ATLAS_TILES * TILE_SIZE; // 4096
+constexpr int VOLUME_SIZE = 256;
+constexpr int ATLAS_TILES = 16;
+constexpr int TILE_SIZE = VOLUME_SIZE;
+constexpr int IMAGE_SIZE = ATLAS_TILES * TILE_SIZE;
 
-constexpr float NOISE_SCALE = 0.02f;
+constexpr float NOISE_SCALE = 0.25f;
 constexpr int NOISE_SEED = 1337;
 constexpr int NOISE_FRACTAL_OCTAVES = 5;
 constexpr float NOISE_LACUNARITY = 2.0f;
 constexpr float NOISE_GAIN = 0.5f;
 
+constexpr int NUM_THREADS = 16; // puedes usar std::thread::hardware_concurrency()
+
 // ==============================
-// MAIN
+// FUNCIÓN DE TRABAJO POR HILO
 // ==============================
-int main()
+void GenerateSlices(
+    std::vector<uint8_t>& image,
+    int zStart,
+    int zEnd
+)
 {
-    std::cout << "Generating 3D noise atlas..." << std::endl;
-
-    // Buffer de imagen (grayscale)
-    std::vector<uint8_t> image(IMAGE_SIZE * IMAGE_SIZE);
-
-    // ==============================
-    // CONFIGURAR FASTNOISELITE
-    // ==============================
+    // Cada hilo tiene su propia instancia (MUY IMPORTANTE)
     FastNoiseLite noise;
     noise.SetSeed(NOISE_SEED);
     noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
     noise.SetFrequency(NOISE_SCALE);
-
-    // Opcional (mejor calidad)
     noise.SetFractalType(FastNoiseLite::FractalType_FBm);
     noise.SetFractalOctaves(NOISE_FRACTAL_OCTAVES);
     noise.SetFractalLacunarity(NOISE_LACUNARITY);
     noise.SetFractalGain(NOISE_GAIN);
 
-    // ==============================
-    // GENERAR VOLUMEN - ATLAS
-    // ==============================
-    for (int z = 0; z < VOLUME_SIZE; z++)
+    for (int z = zStart; z < zEnd; z++)
     {
-        // calcular tile en el atlas
         int tileX = z % ATLAS_TILES;
         int tileY = z / ATLAS_TILES;
 
@@ -57,44 +53,70 @@ int main()
         {
             for (int x = 0; x < VOLUME_SIZE; x++)
             {
-                // coordenadas globales en atlas
                 int atlasX = tileX * TILE_SIZE + x;
                 int atlasY = tileY * TILE_SIZE + y;
-
                 int index = atlasY * IMAGE_SIZE + atlasX;
 
-                // ==============================
-                // SAMPLE DE RUIDO 3D
-                // ==============================
                 float nx = x * NOISE_SCALE;
                 float ny = y * NOISE_SCALE;
                 float nz = z * NOISE_SCALE;
 
-                float n = noise.GetNoise(nx, ny, nz); // [-1,1]
+                float n = noise.GetNoise(nx, ny, nz);
 
-                // convertir a [0,255]
                 float normalized = (n + 1.0f) * 0.5f;
                 uint8_t value = static_cast<uint8_t>(normalized * 255.0f);
 
                 image[index] = value;
             }
         }
+    }
+}
 
-        if (z % 32 == 0)
-            std::cout << "Slice " << z << " / " << VOLUME_SIZE << std::endl;
+// ==============================
+// MAIN
+// ==============================
+int main()
+{
+    std::cout << "Generating 3D noise atlas (multithreaded)..." << std::endl;
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    std::vector<uint8_t> image(IMAGE_SIZE * IMAGE_SIZE);
+
+    std::vector<std::thread> threads;
+
+    int slicesPerThread = VOLUME_SIZE / NUM_THREADS;
+
+    for (int t = 0; t < NUM_THREADS; t++)
+    {
+        int zStart = t * slicesPerThread;
+        int zEnd = (t == NUM_THREADS - 1)
+            ? VOLUME_SIZE
+            : zStart + slicesPerThread;
+
+        threads.emplace_back(GenerateSlices, std::ref(image), zStart, zEnd);
     }
 
-    // ==============================
-    // GUARDAR IMAGEN
-    // ==============================
+    // esperar a todos los hilos
+    for (auto& th : threads)
+        th.join();
+
+    std::cout << "Generation complete, saving..." << std::endl;
+
     int success = stbi_write_png(
         "volume_atlas.png",
         IMAGE_SIZE,
         IMAGE_SIZE,
-        1, // 1 canal (grayscale)
+        1,
         image.data(),
         IMAGE_SIZE
     );
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::cout << "Time: "
+        << std::chrono::duration<double>(end - start).count()
+        << "s\n";
 
     if (success)
         std::cout << "Saved volume_atlas.png" << std::endl;
