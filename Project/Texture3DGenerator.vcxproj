@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Src\Texture3DGenerator\FastNoiseLite.h" />
+    <ClInclude Include="..\Src\Texture3DGenerator\NoiseTypes.h" />
     <ClInclude Include="..\Src\Texture3DGenerator\stb_image_write.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

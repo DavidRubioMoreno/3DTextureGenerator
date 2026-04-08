@@ -9,6 +9,8 @@
 #include <chrono>
 #include "FastNoiseLite.h"
 
+#include "NoiseTypes.h"
+
 // ==============================
 // CONFIGURACIÓN 
 // ==============================
@@ -22,8 +24,39 @@ constexpr int NOISE_SEED = 1337;
 constexpr int NOISE_FRACTAL_OCTAVES = 5;
 constexpr float NOISE_LACUNARITY = 2.0f;
 constexpr float NOISE_GAIN = 0.5f;
+constexpr NoiseType NOISE_TYPE = NoiseType::Perlin;
+constexpr FractalType FRACTAL_TYPE = FractalType::FBm;
 
 constexpr int NUM_THREADS = 16; // puedes usar std::thread::hardware_concurrency()
+
+
+FastNoiseLite::NoiseType ToFastNoise(NoiseType type)
+{
+    switch (type)
+    {
+    case NoiseType::OpenSimplex2:  return FastNoiseLite::NoiseType_OpenSimplex2;
+    case NoiseType::OpenSimplex2S: return FastNoiseLite::NoiseType_OpenSimplex2S;
+    case NoiseType::Cellular:      return FastNoiseLite::NoiseType_Cellular;
+    case NoiseType::Perlin:        return FastNoiseLite::NoiseType_Perlin;
+    case NoiseType::ValueCubic:    return FastNoiseLite::NoiseType_ValueCubic;
+    case NoiseType::Value:         return FastNoiseLite::NoiseType_Value;
+    default:                       return FastNoiseLite::NoiseType_OpenSimplex2;
+    }
+}
+
+FastNoiseLite::FractalType ToFastFractal(FractalType type)
+{
+    switch (type)
+    {
+    case FractalType::None:                  return FastNoiseLite::FractalType_None;
+    case FractalType::FBm:                   return FastNoiseLite::FractalType_FBm;
+    case FractalType::Ridged:                return FastNoiseLite::FractalType_Ridged;
+    case FractalType::PingPong:              return FastNoiseLite::FractalType_PingPong;
+    case FractalType::DomainWarpProgressive: return FastNoiseLite::FractalType_DomainWarpProgressive;
+    case FractalType::DomainWarpIndependent: return FastNoiseLite::FractalType_DomainWarpIndependent;
+    default:                                return FastNoiseLite::FractalType_None;
+    }
+}
 
 // ==============================
 // FUNCIÓN DE TRABAJO POR HILO
@@ -37,9 +70,9 @@ void GenerateSlices(
     // Cada hilo tiene su propia instancia (MUY IMPORTANTE)
     FastNoiseLite noise;
     noise.SetSeed(NOISE_SEED);
-    noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+    noise.SetNoiseType(ToFastNoise(NOISE_TYPE));
+    noise.SetFractalType(ToFastFractal(FRACTAL_TYPE));
     noise.SetFrequency(NOISE_SCALE);
-    noise.SetFractalType(FastNoiseLite::FractalType_FBm);
     noise.SetFractalOctaves(NOISE_FRACTAL_OCTAVES);
     noise.SetFractalLacunarity(NOISE_LACUNARITY);
     noise.SetFractalGain(NOISE_GAIN);
