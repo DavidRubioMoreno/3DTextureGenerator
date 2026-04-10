@@ -16,17 +16,17 @@ constexpr int ATLAS_TILES = 16;
 constexpr int TILE_SIZE = VOLUME_SIZE;
 constexpr int IMAGE_SIZE = ATLAS_TILES * TILE_SIZE;
 
-constexpr float NOISE_SCALE = 0.1f;
-constexpr int NOISE_SEED = 14;
+constexpr float NOISE_SCALE = 0.03f;
+constexpr int NOISE_SEED = 1337;
 constexpr int NOISE_FRACTAL_OCTAVES = 6;
 constexpr float NOISE_LACUNARITY = 2.0f;
 constexpr float NOISE_GAIN = 0.5f;
 constexpr NoiseType NOISE_TYPE = NoiseType::OpenSimplex2;
-constexpr FractalType FRACTAL_TYPE = FractalType::Ridged;
-constexpr bool INVERT_NOISE = true;
-constexpr SeamlessMode SEAMLESS_MODE = SeamlessMode::None;
+constexpr FractalType FRACTAL_TYPE = FractalType::FBm;
+constexpr bool INVERT_NOISE = false;
+constexpr SeamlessMode SEAMLESS_MODE = SeamlessMode::None; //Cuando se activa seamless tarda entre 10 seg y 5 min
 
-constexpr int NUM_THREADS = 8; // puedes usar std::thread::hardware_concurrency()
+constexpr int NUM_THREADS = 12; // puedes usar std::thread::hardware_concurrency()
 
 void GenerateSlicesANL(
     std::vector<uint8_t>& image,
@@ -141,7 +141,8 @@ void GenerateSlices(
 // MAIN
 int main()
 {
-    std::cout << "Generating 3D noise atlas (multithreaded)..." << std::endl;
+    std::cout << "Generating 3D noise atlas with " << NUM_THREADS << " threads." << std::endl;
+    std::cout << "If using seamless mode, the process may take some minutes..." << std::endl;
 
     auto start = std::chrono::high_resolution_clock::now();
 
