@@ -1,8 +1,7 @@
 #pragma once
 
-// ==============================
+
 // TIPOS DE RUIDO
-// ==============================
 enum class NoiseType
 {
     OpenSimplex2,
@@ -13,9 +12,7 @@ enum class NoiseType
     Value
 };
 
-// ==============================
 // TIPOS DE FRACTAL
-// ==============================
 enum class FractalType
 {
     None,

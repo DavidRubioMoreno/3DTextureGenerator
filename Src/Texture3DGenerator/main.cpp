@@ -11,9 +11,8 @@
 
 #include "NoiseTypes.h"
 
-// ==============================
+
 // CONFIGURACIÓN 
-// ==============================
 constexpr int VOLUME_SIZE = 256;
 constexpr int ATLAS_TILES = 16;
 constexpr int TILE_SIZE = VOLUME_SIZE;
@@ -58,9 +57,8 @@ FastNoiseLite::FractalType ToFastFractal(FractalType type)
     }
 }
 
-// ==============================
+
 // FUNCIÓN DE TRABAJO POR HILO
-// ==============================
 void GenerateSlices(
     std::vector<uint8_t>& image,
     int zStart,
@@ -105,9 +103,7 @@ void GenerateSlices(
     }
 }
 
-// ==============================
 // MAIN
-// ==============================
 int main()
 {
     std::cout << "Generating 3D noise atlas (multithreaded)..." << std::endl;
