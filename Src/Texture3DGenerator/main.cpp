@@ -18,13 +18,14 @@ constexpr int ATLAS_TILES = 16;
 constexpr int TILE_SIZE = VOLUME_SIZE;
 constexpr int IMAGE_SIZE = ATLAS_TILES * TILE_SIZE;
 
-constexpr float NOISE_SCALE = 0.1f;
+constexpr float NOISE_SCALE = 0.3f;
 constexpr int NOISE_SEED = 14;
 constexpr int NOISE_FRACTAL_OCTAVES = 6;
 constexpr float NOISE_LACUNARITY = 2.0f;
 constexpr float NOISE_GAIN = 0.5f;
 constexpr NoiseType NOISE_TYPE = NoiseType::OpenSimplex2;
-constexpr FractalType FRACTAL_TYPE = FractalType::FBm;
+constexpr FractalType FRACTAL_TYPE = FractalType::Ridged;
+constexpr bool INVERT_NOISE = true;
 
 constexpr int NUM_THREADS = 8; // puedes usar std::thread::hardware_concurrency()
 
@@ -95,6 +96,10 @@ void GenerateSlices(
                 float n = noise.GetNoise(nx, ny, nz);
 
                 float normalized = (n + 1.0f) * 0.5f;
+
+                if (INVERT_NOISE)
+                    normalized = 1.0f - normalized;
+
                 uint8_t value = static_cast<uint8_t>(normalized * 255.0f);
 
                 image[index] = value;
