@@ -11,7 +11,6 @@
 
 #include "NoiseTypes.h"
 
-#define PI 3.14159265f
 
 // CONFIGURACIÓN 
 constexpr int VOLUME_SIZE = 256;
@@ -26,9 +25,6 @@ constexpr float NOISE_LACUNARITY = 2.0f;
 constexpr float NOISE_GAIN = 0.5f;
 constexpr NoiseType NOISE_TYPE = NoiseType::OpenSimplex2;
 constexpr FractalType FRACTAL_TYPE = FractalType::FBm;
-constexpr TileMode TILE_MODE = TileMode::Blend;
-constexpr float TILE_REPEAT = 1.0f; // cuántas veces repite dentro del volumen
-constexpr float EDGE_WIDTH = 16.0f; // píxeles
 
 constexpr int NUM_THREADS = 8; // puedes usar std::thread::hardware_concurrency()
 
@@ -59,115 +55,6 @@ FastNoiseLite::FractalType ToFastFractal(FractalType type)
     case FractalType::DomainWarpIndependent: return FastNoiseLite::FractalType_DomainWarpIndependent;
     default:                                return FastNoiseLite::FractalType_None;
     }
-}
-
-float SampleNoise(FastNoiseLite& noise, float x, float y, float z)
-{
-    if (TILE_MODE == TileMode::None)
-    {
-        return noise.GetNoise(x, y, z);
-    }
-
-    else if (TILE_MODE == TileMode::PeriodicXYZ)
-    {
-        float fx = x / VOLUME_SIZE;
-        float fy = y / VOLUME_SIZE;
-        float fz = z / VOLUME_SIZE;
-
-        float ax = fx * TILE_REPEAT * 2.0f * PI;
-        float ay = fy * TILE_REPEAT * 2.0f * PI;
-        float az = fz * TILE_REPEAT * 2.0f * PI;
-
-        float nx = cos(ax);
-        float ny = sin(ax);
-
-        float nz = cos(ay);
-        float nw = sin(ay);
-
-        float nu = cos(az);
-        float nv = sin(az);
-
-        return noise.GetNoise(
-            nx + nz + nu,
-            ny + nw + nv,
-            nz + nu
-        );
-    }
-
-    else if (TILE_MODE == TileMode::Blend)
-    {
-        float size = (float)VOLUME_SIZE;
-
-        float sx = x * NOISE_SCALE;
-        float sy = y * NOISE_SCALE;
-        float sz = z * NOISE_SCALE;
-
-        float n = noise.GetNoise(sx, sy, sz);
-
-        // --- X axis ---
-        if (x < EDGE_WIDTH)
-        {
-            float t = 1.0f - (x / EDGE_WIDTH);
-            float s = t * t * t;
-
-            float nWrap = noise.GetNoise((x + size) * NOISE_SCALE, sy, sz);
-
-            n = n * (1.0f - s) + nWrap * s;
-        }
-        else if (x > size - EDGE_WIDTH)
-        {
-            float t = (x - (size - EDGE_WIDTH)) / EDGE_WIDTH;
-            float s = t * t * t;
-
-            float nWrap = noise.GetNoise((x - size) * NOISE_SCALE, sy, sz);
-
-            n = n * (1.0f - s) + nWrap * s;
-        }
-
-        // --- Y axis ---
-        if (y < EDGE_WIDTH)
-        {
-            float t = 1.0f - (y / EDGE_WIDTH);
-            float s = t * t * t;
-
-            float nWrap = noise.GetNoise(sx, (y + size) * NOISE_SCALE, sz);
-
-            n = n * (1.0f - s) + nWrap * s;
-        }
-        else if (y > size - EDGE_WIDTH)
-        {
-            float t = (y - (size - EDGE_WIDTH)) / EDGE_WIDTH;
-            float s = t * t * t;
-
-            float nWrap = noise.GetNoise(sx, (y - size) * NOISE_SCALE, sz);
-
-            n = n * (1.0f - s) + nWrap * s;
-        }
-
-        // --- Z axis ---
-        if (z < EDGE_WIDTH)
-        {
-            float t = 1.0f - (z / EDGE_WIDTH);
-            float s = t * t * t;
-
-            float nWrap = noise.GetNoise(sx, sy, (z + size) * NOISE_SCALE);
-
-            n = n * (1.0f - s) + nWrap * s;
-        }
-        else if (z > size - EDGE_WIDTH)
-        {
-            float t = (z - (size - EDGE_WIDTH)) / EDGE_WIDTH;
-            float s = t * t * t;
-
-            float nWrap = noise.GetNoise(sx, sy, (z - size) * NOISE_SCALE);
-
-            n = n * (1.0f - s) + nWrap * s;
-        }
-
-        return n;
-    }
-
-    return 0.0f;
 }
 
 
@@ -201,12 +88,11 @@ void GenerateSlices(
                 int atlasY = tileY * TILE_SIZE + y;
                 int index = atlasY * IMAGE_SIZE + atlasX;
 
-                /*float nx = x * NOISE_SCALE;
+                float nx = x * NOISE_SCALE;
                 float ny = y * NOISE_SCALE;
-                float nz = z * NOISE_SCALE;*/
+                float nz = z * NOISE_SCALE;
 
-                //float n = SampleNoise(noise, nx, ny, nz);
-                float n = SampleNoise(noise, (float)x, (float)y, (float)z);
+                float n = noise.GetNoise(nx, ny, nz);
 
                 float normalized = (n + 1.0f) * 0.5f;
                 uint8_t value = static_cast<uint8_t>(normalized * 255.0f);
