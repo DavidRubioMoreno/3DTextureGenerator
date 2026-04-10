@@ -7,16 +7,8 @@
 #include <thread>
 #include <cmath>
 #include <chrono>
-#include "FastNoiseLite.h"
-#include "anl.h"
 
 #include "NoiseTypes.h"
-
-enum class SeamlessMode
-{
-    None,
-    XYZ
-};
 
 // CONFIGURACIÓN 
 constexpr int VOLUME_SIZE = 256;
@@ -32,39 +24,9 @@ constexpr float NOISE_GAIN = 0.5f;
 constexpr NoiseType NOISE_TYPE = NoiseType::OpenSimplex2;
 constexpr FractalType FRACTAL_TYPE = FractalType::Ridged;
 constexpr bool INVERT_NOISE = true;
-constexpr SeamlessMode SEAMLESS_MODE = SeamlessMode::XYZ;
+constexpr SeamlessMode SEAMLESS_MODE = SeamlessMode::None;
 
 constexpr int NUM_THREADS = 8; // puedes usar std::thread::hardware_concurrency()
-
-
-FastNoiseLite::NoiseType ToFastNoise(NoiseType type)
-{
-    switch (type)
-    {
-    case NoiseType::OpenSimplex2:  return FastNoiseLite::NoiseType_OpenSimplex2;
-    case NoiseType::OpenSimplex2S: return FastNoiseLite::NoiseType_OpenSimplex2S;
-    case NoiseType::Cellular:      return FastNoiseLite::NoiseType_Cellular;
-    case NoiseType::Perlin:        return FastNoiseLite::NoiseType_Perlin;
-    case NoiseType::ValueCubic:    return FastNoiseLite::NoiseType_ValueCubic;
-    case NoiseType::Value:         return FastNoiseLite::NoiseType_Value;
-    default:                       return FastNoiseLite::NoiseType_OpenSimplex2;
-    }
-}
-
-FastNoiseLite::FractalType ToFastFractal(FractalType type)
-{
-    switch (type)
-    {
-    case FractalType::None:                  return FastNoiseLite::FractalType_None;
-    case FractalType::FBm:                   return FastNoiseLite::FractalType_FBm;
-    case FractalType::Ridged:                return FastNoiseLite::FractalType_Ridged;
-    case FractalType::PingPong:              return FastNoiseLite::FractalType_PingPong;
-    case FractalType::DomainWarpProgressive: return FastNoiseLite::FractalType_DomainWarpProgressive;
-    case FractalType::DomainWarpIndependent: return FastNoiseLite::FractalType_DomainWarpIndependent;
-    default:                                return FastNoiseLite::FractalType_None;
-    }
-}
-
 
 void GenerateSlicesANL(
     std::vector<uint8_t>& image,
@@ -72,15 +34,16 @@ void GenerateSlicesANL(
     int zEnd
 )
 {
-    anl::CImplicitFractal noise(
-        anl::RIDGEDMULTI,
-        anl::GRADIENT,
-        anl::QUINTIC
+    anl::CImplicitFractal noise = CreateANLFractalFull(
+        FRACTAL_TYPE,
+        NOISE_TYPE,
+        anl::QUINTIC,
+        NOISE_FRACTAL_OCTAVES,
+        NOISE_SCALE,
+        NOISE_LACUNARITY,
+        NOISE_GAIN,
+        NOISE_SEED
     );
-
-    noise.setSeed(NOISE_SEED);
-    noise.setNumOctaves(NOISE_FRACTAL_OCTAVES);
-    noise.setFrequency(NOISE_SCALE);
 
     anl::CArray3Dd buffer(VOLUME_SIZE, VOLUME_SIZE, VOLUME_SIZE);
 
@@ -113,22 +76,7 @@ void GenerateSlicesANL(
                 int atlasY = tileY * TILE_SIZE + y;
                 int index = atlasY * IMAGE_SIZE + atlasX;
 
-                double val = 0.0;
-
-                switch (SEAMLESS_MODE)
-                {
-                case SeamlessMode::None:
-                    val = noise.get(x, y, z);
-                    break;
-
-                case SeamlessMode::XYZ:
-                    val = buffer.get(x, y, z);
-                    break;
-
-                default:
-                    val = noise.get(x, y, z);
-                    break;
-                }
+                double val = buffer.get(x, y, z);
 
                 float normalized = (val + 1.0f) * 0.5f;
 
