@@ -1,8 +1,15 @@
 #pragma once
 
-// ==============================
+
+// TIPOS DE TILES
+enum class TileMode
+{
+    None,        
+    PeriodicXYZ, // seamless real (trigonométrico)
+    Blend        // interpolación de bordes (más simple)
+};
+
 // TIPOS DE RUIDO
-// ==============================
 enum class NoiseType
 {
     OpenSimplex2,
@@ -13,9 +20,8 @@ enum class NoiseType
     Value
 };
 
-// ==============================
+
 // TIPOS DE FRACTAL
-// ==============================
 enum class FractalType
 {
     None,

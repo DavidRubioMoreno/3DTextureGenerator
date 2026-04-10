@@ -11,23 +11,25 @@
 
 #include "NoiseTypes.h"
 
-// ==============================
+#define PI 3.14159265f
+
 // CONFIGURACIÓN 
-// ==============================
 constexpr int VOLUME_SIZE = 256;
 constexpr int ATLAS_TILES = 16;
 constexpr int TILE_SIZE = VOLUME_SIZE;
 constexpr int IMAGE_SIZE = ATLAS_TILES * TILE_SIZE;
 
-constexpr float NOISE_SCALE = 0.25f;
+constexpr float NOISE_SCALE = 0.1f;
 constexpr int NOISE_SEED = 1337;
-constexpr int NOISE_FRACTAL_OCTAVES = 5;
+constexpr int NOISE_FRACTAL_OCTAVES = 8;
 constexpr float NOISE_LACUNARITY = 2.0f;
 constexpr float NOISE_GAIN = 0.5f;
-constexpr NoiseType NOISE_TYPE = NoiseType::Perlin;
+constexpr NoiseType NOISE_TYPE = NoiseType::OpenSimplex2S;
 constexpr FractalType FRACTAL_TYPE = FractalType::FBm;
+constexpr TileMode TILE_MODE = TileMode::Blend;
+constexpr float TILE_REPEAT = 1.0f; // cuántas veces repite dentro del volumen
 
-constexpr int NUM_THREADS = 16; // puedes usar std::thread::hardware_concurrency()
+constexpr int NUM_THREADS = 8; // puedes usar std::thread::hardware_concurrency()
 
 
 FastNoiseLite::NoiseType ToFastNoise(NoiseType type)
@@ -58,9 +60,62 @@ FastNoiseLite::FractalType ToFastFractal(FractalType type)
     }
 }
 
-// ==============================
+float SampleNoise(FastNoiseLite& noise, float x, float y, float z)
+{
+    if (TILE_MODE == TileMode::None)
+    {
+        return noise.GetNoise(x, y, z);
+    }
+
+    else if (TILE_MODE == TileMode::PeriodicXYZ)
+    {
+        float fx = x / VOLUME_SIZE;
+        float fy = y / VOLUME_SIZE;
+        float fz = z / VOLUME_SIZE;
+
+        float ax = fx * TILE_REPEAT * 2.0f * PI;
+        float ay = fy * TILE_REPEAT * 2.0f * PI;
+        float az = fz * TILE_REPEAT * 2.0f * PI;
+
+        float nx = cos(ax);
+        float ny = sin(ax);
+
+        float nz = cos(ay);
+        float nw = sin(ay);
+
+        float nu = cos(az);
+        float nv = sin(az);
+
+        return noise.GetNoise(
+            nx + nz + nu,
+            ny + nw + nv,
+            nz + nu
+        );
+    }
+
+    else if (TILE_MODE == TileMode::Blend)
+    {
+        float blendX = x / VOLUME_SIZE;
+        float blendY = y / VOLUME_SIZE;
+        float blendZ = z / VOLUME_SIZE;
+
+        float n000 = noise.GetNoise(x, y, z);
+        float n100 = noise.GetNoise(x - VOLUME_SIZE, y, z);
+        float n010 = noise.GetNoise(x, y - VOLUME_SIZE, z);
+        float n001 = noise.GetNoise(x, y, z - VOLUME_SIZE);
+
+        float nx = n000 * (1 - blendX) + n100 * blendX;
+        float ny = n000 * (1 - blendY) + n010 * blendY;
+        float nz = n000 * (1 - blendZ) + n001 * blendZ;
+
+        return (nx + ny + nz) / 3.0f;
+    }
+
+    return 0.0f;
+}
+
+
 // FUNCIÓN DE TRABAJO POR HILO
-// ==============================
 void GenerateSlices(
     std::vector<uint8_t>& image,
     int zStart,
@@ -94,7 +149,7 @@ void GenerateSlices(
                 float ny = y * NOISE_SCALE;
                 float nz = z * NOISE_SCALE;
 
-                float n = noise.GetNoise(nx, ny, nz);
+                float n = SampleNoise(noise, nx, ny, nz);
 
                 float normalized = (n + 1.0f) * 0.5f;
                 uint8_t value = static_cast<uint8_t>(normalized * 255.0f);
@@ -105,9 +160,7 @@ void GenerateSlices(
     }
 }
 
-// ==============================
 // MAIN
-// ==============================
 int main()
 {
     std::cout << "Generating 3D noise atlas (multithreaded)..." << std::endl;
