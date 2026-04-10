@@ -19,9 +19,128 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Src\accidentalnoise\src\arrayoperations.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\cellulargen.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\hsv.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitautocorrect.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitbasisfunction.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitbias.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitblend.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitbrightcontrast.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcache.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcellular.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitclamp.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcombiner.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitconstant.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcos.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcurve.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitextractrgbachannel.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitfloor.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitfractal.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitfunctiongradient.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitgain.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitgradient.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitmagnitude.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitmodulebase.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitnormalizecoords.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitpow.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitrgbadotproduct.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitrotatedomain.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitsawtooth.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitscaledomain.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitscaleoffset.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitselect.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitsin.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitsphere.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicittiers.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicittranslatedomain.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\implicittriangle.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\mapping.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\noise_gen.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\noise_lut.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rasterization.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbablend.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbablendops.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbacolorops.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbacomposechannels.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbaconstant.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbacurve.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbahsvtorgba.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbaimplicitgrayscale.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbanormalize.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbargbatohsv.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbarotatecolor.cpp" />
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbaselect.cpp" />
     <ClCompile Include="..\Src\Texture3DGenerator\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Src\accidentalnoise\include\anl.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\arrayoperations.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\cellulargen.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\hsv.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitautocorrect.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitbasisfunction.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitbias.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitblend.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitbrightcontrast.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcache.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcellular.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitclamp.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcombiner.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitconstant.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcos.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcurve.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitextractrgbachannel.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitfloor.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitfractal.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitfunctiongradient.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitgain.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitgradient.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitmagnitude.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitmodifier.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitmodulebase.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitnormalizecoords.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitpow.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitrgbadotproduct.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitrotatedomain.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitsawtooth.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitscaledomain.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitscaleoffset.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitselect.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitsin.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitsphere.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittiers.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittransform.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittranslatedomain.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittriangle.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\mapping.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\noiselut.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\noise_gen.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\noise_lut.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\random_gen.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rasterization.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgba.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbablend.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbablendops.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbacolorops.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbacomposechannels.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbaconstant.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbacurve.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbahsvtorgba.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbaimplicitgrayscale.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbamodulebase.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbanormalize.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbargbatohsv.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbarotatecolor.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbaselect.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tarrays.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tcurve.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tvec2d.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tvec3d.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tvec4d.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\utility.h" />
+    <ClInclude Include="..\Src\accidentalnoise\include\vectortypes.h" />
+    <ClInclude Include="..\Src\accidentalnoise\src\noiselut.h" />
     <ClInclude Include="..\Src\Texture3DGenerator\FastNoiseLite.h" />
     <ClInclude Include="..\Src\Texture3DGenerator\NoiseTypes.h" />
     <ClInclude Include="..\Src\Texture3DGenerator\stb_image_write.h" />
@@ -102,6 +221,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Src\accidentalnoise\src\;$(SolutionDir)\Src\accidentalnoise\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,6 +236,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Src\accidentalnoise\src\;$(SolutionDir)\Src\accidentalnoise\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +249,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Src\accidentalnoise\src\;$(SolutionDir)\Src\accidentalnoise\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +264,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Src\accidentalnoise\src\;$(SolutionDir)\Src\accidentalnoise\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

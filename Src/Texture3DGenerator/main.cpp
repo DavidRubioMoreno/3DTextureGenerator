@@ -8,9 +8,15 @@
 #include <cmath>
 #include <chrono>
 #include "FastNoiseLite.h"
+#include "anl.h"
 
 #include "NoiseTypes.h"
 
+enum class SeamlessMode
+{
+    None,
+    XYZ
+};
 
 // CONFIGURACIÓN 
 constexpr int VOLUME_SIZE = 256;
@@ -18,7 +24,7 @@ constexpr int ATLAS_TILES = 16;
 constexpr int TILE_SIZE = VOLUME_SIZE;
 constexpr int IMAGE_SIZE = ATLAS_TILES * TILE_SIZE;
 
-constexpr float NOISE_SCALE = 0.3f;
+constexpr float NOISE_SCALE = 0.1f;
 constexpr int NOISE_SEED = 14;
 constexpr int NOISE_FRACTAL_OCTAVES = 6;
 constexpr float NOISE_LACUNARITY = 2.0f;
@@ -26,6 +32,7 @@ constexpr float NOISE_GAIN = 0.5f;
 constexpr NoiseType NOISE_TYPE = NoiseType::OpenSimplex2;
 constexpr FractalType FRACTAL_TYPE = FractalType::Ridged;
 constexpr bool INVERT_NOISE = true;
+constexpr SeamlessMode SEAMLESS_MODE = SeamlessMode::XYZ;
 
 constexpr int NUM_THREADS = 8; // puedes usar std::thread::hardware_concurrency()
 
@@ -58,6 +65,81 @@ FastNoiseLite::FractalType ToFastFractal(FractalType type)
     }
 }
 
+
+void GenerateSlicesANL(
+    std::vector<uint8_t>& image,
+    int zStart,
+    int zEnd
+)
+{
+    anl::CImplicitFractal noise(
+        anl::RIDGEDMULTI,
+        anl::GRADIENT,
+        anl::QUINTIC
+    );
+
+    noise.setSeed(NOISE_SEED);
+    noise.setNumOctaves(NOISE_FRACTAL_OCTAVES);
+    noise.setFrequency(NOISE_SCALE);
+
+    anl::CArray3Dd buffer(VOLUME_SIZE, VOLUME_SIZE, VOLUME_SIZE);
+
+    anl::SMappingRanges ranges;
+    ranges.mapx0 = 0; ranges.mapx1 = VOLUME_SIZE;
+    ranges.mapy0 = 0; ranges.mapy1 = VOLUME_SIZE;
+    ranges.mapz0 = 0; ranges.mapz1 = VOLUME_SIZE;
+
+    ranges.loopx0 = 0; ranges.loopx1 = VOLUME_SIZE;
+    ranges.loopy0 = 0; ranges.loopy1 = VOLUME_SIZE;
+    ranges.loopz0 = 0; ranges.loopz1 = VOLUME_SIZE;
+
+    anl::map3D(
+        anl::SEAMLESS_XYZ,
+        buffer,
+        noise,
+        ranges
+    );
+
+    for (int z = zStart; z < zEnd; z++)
+    {
+        int tileX = z % ATLAS_TILES;
+        int tileY = z / ATLAS_TILES;
+
+        for (int y = 0; y < VOLUME_SIZE; y++)
+        {
+            for (int x = 0; x < VOLUME_SIZE; x++)
+            {
+                int atlasX = tileX * TILE_SIZE + x;
+                int atlasY = tileY * TILE_SIZE + y;
+                int index = atlasY * IMAGE_SIZE + atlasX;
+
+                double val = 0.0;
+
+                switch (SEAMLESS_MODE)
+                {
+                case SeamlessMode::None:
+                    val = noise.get(x, y, z);
+                    break;
+
+                case SeamlessMode::XYZ:
+                    val = buffer.get(x, y, z);
+                    break;
+
+                default:
+                    val = noise.get(x, y, z);
+                    break;
+                }
+
+                float normalized = (val + 1.0f) * 0.5f;
+
+                if (INVERT_NOISE)
+                    normalized = 1.0f - normalized;
+
+                image[index] = (uint8_t)(normalized * 255.0f);
+            }
+        }
+    }
+}
 
 // FUNCIÓN DE TRABAJO POR HILO
 void GenerateSlices(
@@ -127,8 +209,12 @@ int main()
         int zEnd = (t == NUM_THREADS - 1)
             ? VOLUME_SIZE
             : zStart + slicesPerThread;
-
-        threads.emplace_back(GenerateSlices, std::ref(image), zStart, zEnd);
+        if (SEAMLESS_MODE == SeamlessMode::None) {
+            threads.emplace_back(GenerateSlices, std::ref(image), zStart, zEnd);
+        }
+        else {
+            threads.emplace_back(GenerateSlicesANL, std::ref(image), zStart, zEnd);
+        }
     }
 
     // esperar a todos los hilos

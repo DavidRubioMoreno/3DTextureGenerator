@@ -13,10 +13,172 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de origen\ANL">
+      <UniqueIdentifier>{83cde93d-2601-4a5e-8d37-65a903cad415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\ANL">
+      <UniqueIdentifier>{bfb50a24-e649-4b2c-8c5d-9468aca3d205}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Src\Texture3DGenerator\main.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\arrayoperations.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\cellulargen.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\hsv.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitautocorrect.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitbasisfunction.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitbias.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitblend.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitbrightcontrast.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcache.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcellular.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitclamp.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcombiner.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitconstant.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcos.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitcurve.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitextractrgbachannel.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitfloor.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitfractal.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitfunctiongradient.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitgain.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitgradient.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitmagnitude.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitmodulebase.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitnormalizecoords.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitpow.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitrgbadotproduct.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitrotatedomain.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitsawtooth.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitscaledomain.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitscaleoffset.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitselect.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitsin.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicitsphere.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicittiers.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicittranslatedomain.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\implicittriangle.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\mapping.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\noise_gen.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\noise_lut.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rasterization.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbablend.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbablendops.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbacolorops.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbacomposechannels.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbaconstant.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbacurve.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbahsvtorgba.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbaimplicitgrayscale.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbanormalize.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbargbatohsv.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbarotatecolor.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Src\accidentalnoise\src\rgbaselect.cpp">
+      <Filter>Archivos de origen\ANL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +190,207 @@
     </ClInclude>
     <ClInclude Include="..\Src\Texture3DGenerator\NoiseTypes.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\src\noiselut.h">
+      <Filter>Archivos de origen\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\anl.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\arrayoperations.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\cellulargen.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\hsv.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitautocorrect.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitbasisfunction.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitbias.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitblend.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitbrightcontrast.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcache.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcellular.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitclamp.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcombiner.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitconstant.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcos.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitcurve.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitextractrgbachannel.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitfloor.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitfractal.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitfunctiongradient.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitgain.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitgradient.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitmagnitude.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitmodifier.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitmodulebase.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitnormalizecoords.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitpow.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitrgbadotproduct.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitrotatedomain.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitsawtooth.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitscaledomain.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitscaleoffset.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitselect.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitsin.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicitsphere.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittiers.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittransform.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittranslatedomain.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\implicittriangle.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\mapping.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\noise_gen.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\noise_lut.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\noiselut.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\random_gen.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rasterization.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgba.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbablend.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbablendops.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbacolorops.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbacomposechannels.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbaconstant.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbacurve.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbahsvtorgba.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbaimplicitgrayscale.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbamodulebase.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbanormalize.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbargbatohsv.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbarotatecolor.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\rgbaselect.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\utility.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\vectortypes.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tarrays.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tcurve.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tvec2d.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tvec3d.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\accidentalnoise\include\templates\tvec4d.h">
+      <Filter>Archivos de encabezado\ANL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
