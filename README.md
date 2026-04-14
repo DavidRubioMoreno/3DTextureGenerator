@@ -71,6 +71,15 @@ This allows efficient use of multi-core CPUs (e.g., 16 threads).
 * Supports multiple algorithms and fractals
 * Header-only (easy integration)
 
+### ANL (Accidental Noise Library)
+
+* Modular procedural noise generation system (node-based)
+* Supports chaining of functions to build complex noise graphs
+* Multi-dimensional noise (2D, 3D, 4D, 6D) for advanced use cases
+* Includes generators, modifiers, and combiners for flexible workflows
+* Provides both scalar (implicit) and RGBA noise outputs
+* Useful for procedural textures, terrain generation, and graphics pipelines
+
 ### stb_image_write
 
 * Lightweight image writing library
