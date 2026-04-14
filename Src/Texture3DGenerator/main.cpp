@@ -10,7 +10,7 @@
 
 #include "NoiseTypes.h"
 
-// CONFIGURACIÓN 
+// CONFIGURATION 
 constexpr int VOLUME_SIZE = 256;
 constexpr int ATLAS_TILES = 16;
 constexpr int TILE_SIZE = VOLUME_SIZE;
@@ -24,9 +24,9 @@ constexpr float NOISE_GAIN = 0.5f;
 constexpr NoiseType NOISE_TYPE = NoiseType::OpenSimplex2;
 constexpr FractalType FRACTAL_TYPE = FractalType::FBm;
 constexpr bool INVERT_NOISE = false;
-constexpr SeamlessMode SEAMLESS_MODE = SeamlessMode::None; //Cuando se activa seamless tarda entre 10 seg y 5 min
+constexpr SeamlessMode SEAMLESS_MODE = SeamlessMode::None; // When active, generation may take between 10 secs and 5 mins
 
-constexpr int NUM_THREADS = 12; // puedes usar std::thread::hardware_concurrency()
+constexpr int NUM_THREADS = 12;
 
 void GenerateSlicesANL(
     std::vector<uint8_t>& image,
@@ -89,14 +89,12 @@ void GenerateSlicesANL(
     }
 }
 
-// FUNCIÓN DE TRABAJO POR HILO
 void GenerateSlices(
     std::vector<uint8_t>& image,
     int zStart,
     int zEnd
 )
 {
-    // Cada hilo tiene su propia instancia (MUY IMPORTANTE)
     FastNoiseLite noise;
     noise.SetSeed(NOISE_SEED);
     noise.SetNoiseType(ToFastNoise(NOISE_TYPE));
@@ -166,7 +164,7 @@ int main()
         }
     }
 
-    // esperar a todos los hilos
+    // wait for the threads to end
     for (auto& th : threads)
         th.join();
 
