@@ -31,6 +31,7 @@ This type of texture is compatible with engines like **Unreal Engine 5**, where 
   * PingPong
   * Domain Warp
 * Multithreaded generation (leverages modern CPUs)
+* Seamless mode
 * PNG image export
 * Configurable via `constexpr` parameters
 
@@ -108,16 +109,6 @@ volume_atlas.png
 * Resolution: **4096×4096**
 * Format: **Grayscale (single channel)**
 * Content: slices of a 3D volume
-
----
-
-## Usage in Unreal Engine 5
-
-1. Import the texture into UE5
-2. Disable **sRGB**
-3. Set compression (e.g., *Masks*)
-4. Convert to a **Volume Texture** if needed
-5. Use it in volumetric materials
 
 ---
 
