@@ -99,10 +99,10 @@ anl::EFractalTypes ToANLFractal(FractalType type)
     switch (type)
     {
     case FractalType::None:
-        return anl::FBM; // fallback seguro
+        return anl::RIDGEDMULTI; // fallback seguro
 
     case FractalType::FBm:
-        return anl::FBM;
+        return anl::RIDGEDMULTI;
 
     case FractalType::Ridged:
         return anl::RIDGEDMULTI;
@@ -117,7 +117,7 @@ anl::EFractalTypes ToANLFractal(FractalType type)
         return anl::DECARPENTIERSWISS;
 
     default:
-        return anl::FBM;
+        return anl::RIDGEDMULTI;
     }
 }
 
