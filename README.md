@@ -70,6 +70,7 @@ This allows efficient use of multi-core CPUs (e.g., 16 threads).
 * High-performance procedural noise generation
 * Supports multiple algorithms and fractals
 * Header-only (easy integration)
+* Repository: https://github.com/Auburn/FastNoiseLite
 
 ### ANL (Accidental Noise Library)
 
@@ -79,12 +80,14 @@ This allows efficient use of multi-core CPUs (e.g., 16 threads).
 * Includes generators, modifiers, and combiners for flexible workflows
 * Provides both scalar (implicit) and RGBA noise outputs
 * Useful for procedural textures, terrain generation, and graphics pipelines
+* Repository: https://accidentalnoise.sourceforge.net/
 
 ### stb_image_write
 
 * Lightweight image writing library
 * Supports multiple formats (PNG, BMP, TGA, JPG, HDR)
 * Used to export the generated atlas
+* Repository: https://github.com/nothings/stb
 
 ---
 
